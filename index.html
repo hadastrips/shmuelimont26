@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דשבורד טיול מונטנגרו</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-turquoise: #00A896;
+            --primary-green: #028090;
+            --dark-green: #114B5F;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+        }
+
+        /* שיטה חסינה למרכוז מלא במחשב */
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #eef2f3; /* רקע חיצוני עדין למחשב */
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* האפליקציה עצמה - צרה וממורכזת */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-turquoise);
+            margin: 0 auto 15px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        /* קופסת מידע עליונה נקייה */
+        .info-box-header {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-right: 4px solid var(--primary-turquoise);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: right;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .btn-turquoise { background-color: var(--primary-turquoise); }
+        .btn-dark { background-color: var(--dark-green); }
+
+        /* Day Card */
+        .day-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #f0f4f5;
+            border-top: 5px solid var(--dark-green);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(17, 75, 95, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .day-title {
+            color: var(--dark-green);
+            margin: 0;
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        /* Foldable Details (Smart Cards) */
+        details {
+            background-color: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        details[open] {
+            border-color: var(--primary-turquoise);
+            box-shadow: 0 2px 8px rgba(0, 168, 150, 0.1);
+        }
+
+        summary {
+            padding: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dark-green);
+            background-color: #fafbfc;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '\f107'; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-turquoise);
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after { transform: rotate(180deg); }
+
+        .details-content {
+            padding: 15px;
+            border-top: 1px solid #eaeaea;
+            font-size: 14px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 12px;
+        }
+        .info-row:last-child { margin-bottom: 0; }
+        .info-row i {
+            color: var(--primary-turquoise);
+            font-size: 16px;
+            margin-top: 4px;
+            width: 20px;
+            text-align: center;
+        }
+        .info-row a {
+            color: var(--dark-green);
+            text-decoration: underline;
+            text-decoration-color: var(--primary-turquoise);
+            font-weight: 600;
+        }
+
+        /* קופסאות קבועות בתוך הלו"ז */
+        .info-box-inline {
+            background-color: #f4fafb;
+            border: 1px solid #e6f4f5;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        /* Table Style */
+        .table-wrapper { overflow-x: auto; margin-top: 15px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background-color: var(--dark-green); color: white; padding: 12px; text-align: right; }
+        td { padding: 12px; border-bottom: 1px solid #eaeaea; }
+        tr:nth-child(even) { background-color: #f9fbfc; }
+        .total-row { font-weight: 700; color: var(--primary-green); }
+
+        .footer { text-align: center; padding: 30px 15px; font-size: 14px; color: var(--text-light); border-top: 1px solid #ddd; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="header">
+        <img src="1.jpg" alt="לוגו טיול" class="logo" onerror="if (this.src != '1.JPG') this.src = '1.JPG';">
+        
+        <h1 style="text-align: center !important; width: 100% !important; margin: 0 auto 15px auto !important; display: block !important; color: var(--dark-green); font-size: 26px;">טיול זוגי ברגשטיין מונטנגרו | מאי-יוני 2026</h1>
+        
+        <div class="info-box-header">
+            <strong><i class="fa-solid fa-coins"></i> מטבע: יורו (€)</strong><br>
+            <strong><i class="fa-solid fa-sun"></i> שקיעה:</strong> 20:00
+        </div>
+
+        <div class="quick-links">
+            <a href="https://maps.app.goo.gl/ozjUZTJ43qsqiQKR8" target="_blank" class="btn"><i class="fa-solid fa-map-location-dot"></i> המפה שלכם</a>
+            <a href="https://www.accuweather.com/he/me/zabljak/301368/weather-forecast/301368" target="_blank" class="btn btn-turquoise"><i class="fa-solid fa-cloud-sun"></i> תחזית ז'בליאק</a>
+        </div>
+        <div class="quick-links">
+            <a href="#" class="btn btn-dark"><i class="fa-solid fa-hotel"></i> דירה ז'בליאק</a>
+            <a href="#" class="btn btn-dark"><i class="fa-solid fa-house-user"></i> דירה קוטור</a>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום ראשון (31/5) – נחיתה, אגם הטורקיז ומעבר ההרים</h2>
+        </div>
+
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-turquoise);">
+            <i class="fa-solid fa-plane-arrival"></i> <strong>09:00 – 10:30</strong> נחיתה בטיבאט, איסוף רכב ויציאה צפונה.
+        </div>
+
+        <details>
+            <summary>12:15 - 13:00 | תצפית אגם קרופאץ'</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-coffee"></i><div><strong>פעילות:</strong> עצירת קפה ומתיחת רגליים מול המים ליד ניקשיץ'.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/gZQPDs28cN9MfkXE8" target="_blank">ניווט לאגם קרופאץ'</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>14:00 - 17:00 | עצירת וואו באגם פיבה</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-water"></i><div><strong>מה עושים:</strong> טיילת על האגם, נקודת תצפית מרהיבה, אופציה לשייט או אומגה.</div></div>
+                <div class="info-row"><i class="fa-solid fa-links"></i><div><a href="https://maps.app.goo.gl/74xMGipDU8G6MgwH6" target="_blank">טיילת האגם</a> | <a href="https://maps.app.goo.gl/NL5dGt3ZcVqN2pou9" target="_blank">אומגה/שייט</a> | <a href="https://maps.app.goo.gl/GP711CpcCBFBV5Yq5" target="_blank">נקודת תצפית</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>17:00 - 19:00 | מעבר ההרים "סדלו"</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-mountain-sun"></i><div><strong>פעילות:</strong> כביש P14 הפנורמי המרהיב החוצה את שמורת דורמיטור.</div></div>
+                <div class="info-row"><i class="fa-solid fa-wallet"></i><div><strong>עלות:</strong> כניסה לשמורה ברכב: כ-5€ לאדם.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/oFCjM6Ab6pFMMVDL6" target="_blank">ניווט למעבר סדלו</a></div></div>
+            </div>
+        </details>
+
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-green); margin-bottom: 0;">
+            <i class="fa-solid fa-house"></i> <strong>19:00</strong> הגעה לז'אבליק, צ'ק-אין בבקתה וארוחת ערב חמימה.
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום שני (1/6) – גשר טרה והאגמים היפים</h2>
+        </div>
+
+        <details>
+            <summary>10:30 - 12:00 | גשר טארה והאומגה</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-bridge"></i><div><strong>מה עושים:</strong> ביקור בגשר המפורסם (בשיפוצים אך שווה) וחווית אומגה מטורפת מול הנוף.</div></div>
+                <div class="info-row"><i class="fa-solid fa-tag"></i><div><strong>עלות אומגה:</strong> 45 יורו לאדם.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/aa7zfEDq2fkP88WY6" target="_blank">ניווט לגשר טארה</a> | <a href="https://maps.app.goo.gl/SkGGX4tzS5z8mEZY7" target="_blank">ניווט לאומגה</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>12:30 - 15:30 | הקפת האגם השחור</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-person-walking"></i><div><strong>מה עושים:</strong> הליכה קלה ופוטוגנית במסלול המקיף את האגם בתוך היער.</div></div>
+                <div class="info-row"><i class="fa-solid fa-ship"></i><div><strong>אופציונלי:</strong> השכרת סירת משוטים מעץ (כ-10€ לשעה).</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/qAcnLYXHyBi6XMKi8" target="_blank">ניווט לאגם השחור</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>16:00 - 18:00 | אגם הנחש / טרקטורונים</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-tree"></i><div><strong>אפשרות 1:</strong> הליכה רגלית קסומה מסביב לאגם הנחש (<a href="https://maps.app.goo.gl/44V2AJk3Jzme6P15A" target="_blank">מיקום</a>).</div></div>
+                <div class="info-row"><i class="fa-solid fa-truck-monster"></i><div><strong>אפשרות 2 (אופציונלי):</strong> טיול טרקטורונים/RZR בשטח לעומק שמורת דורמיטור (100€ לזוג).</div></div>
+            </div>
+        </details>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום שלישי (2/6) – רפטינג בקניון טרה</h2>
+        </div>
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-orange);">
+            <i class="fa-solid fa-clock"></i> <strong>08:30</strong> יציאה מהדירה
+        </div>
+        <details>
+            <summary>10:30 - 16:00 | חווית רפטינג מטורפת</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-water"></i><div><strong>פעילות:</strong> 4 שעות של רפטינג חוויתי בקניון טרה המדהים!</div></div>
+                <div class="info-row"><i class="fa-solid fa-tag"></i><div><strong>עלות:</strong> 70€ לאדם.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/pLMqP6rLbndyqjDdA" target="_blank">ניווט לנקודת הרפטינג</a></div></div>
+            </div>
+        </details>
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-green); margin-bottom: 0;">
+            <i class="fa-solid fa-right-from-bracket"></i> <strong>18:00</strong> חזרה משוערת לדירה.
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום רביעי (3/6) – שופינג ושושני מים</h2>
+        </div>
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-turquoise);">
+            <i class="fa-solid fa-car"></i> <strong>09:00</strong> צ'ק אאוט בז'בליאק וירידה לכיוון דרום.
+        </div>
+
+        <details>
+            <summary>11:30 - 14:30 | השופינג הגדול בפודגוריצה</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-bag-shopping"></i><div><strong>מיקום:</strong> קניון BIG Fashion Podgorica. זמן למותגים (זארה, מנגו, ברשקה וכו'). פתוח 10:00–22:00.</div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>15:00 - 17:00 | שייט שושני מים באגם סקאדאר</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-seedling"></i><div><strong>פעילות:</strong> שייט קסום בין שושני המים באגם המפורסם. פתוח 9:00-18:00.</div></div>
+                <div class="info-row"><i class="fa-solid fa-tag"></i><div><strong>עלות:</strong> 22 יורו לשעתיים לאדם.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/RnwrYwRYPVnt3xov5 " target="_blank">ניווט לנקודת השייט</a></div></div>
+            </div>
+        </details>
+
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-green);">
+            <i class="fa-solid fa-utensils"></i> <strong>18:00</strong> ארוחת ערב במסעדה הכשרה בבדווה - <a href="https://maps.app.goo.gl/z6pmruVBDC7EFUxV9" target="_blank">ניווט</a>
+        </div>
+        <div class="info-box-inline" style="border-right: 4px solid var(--dark-green); margin-bottom: 0;">
+            <i class="fa-solid fa-bed"></i> <strong>20:00</strong> הגעה לקוטור והתמקמות בדירה.
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום חמישי (4/6) – קסם במפרץ קוטור</h2>
+        </div>
+
+        <details>
+            <summary>09:30 - 11:00 | שוק אומנות ומזכרות</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-store"></i><div><strong>מיקום:</strong> בזאר קוטור (Kotor Bazaar) בתוך מנזר עתיק משוקם. ציורים, תכשיטים ועבודות יד. פתוח 09:00–20:00.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/G7HKgTAgtqSMEpcVA" target="_blank">ניווט לבזאר</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>11:30 - 14:30 | רכבל ומגלשת הרים Lovcen</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-cable-car"></i><div><strong>פעילות:</strong> עלייה ברכבל Kotor Cable Car לפסגה וחוויית מגלשות הרים מול נוף המפרץ.</div></div>
+                <div class="info-row"><i class="fa-solid fa-tag"></i><div><strong>עלות:</strong> רכבל הלוך-חזור כ-23€ | מגלשה כ-8€ לנסיעה.</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/pTpDw7C1yHy3ryzK7" target="_blank">ניווט לרכבל</a></div></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>15:00 - 18:00 | סירה מהירה למערת התכלת</summary>
+            <div class="details-content">
+                <div class="info-row"><i class="fa-solid fa-ship"></i><div><strong>פעילות:</strong> שיט קצבי מהנמל הראשי הכולל את "מערת התכלת" והאי "גבירתנו של הסלעים".</div></div>
+                <div class="info-row"><i class="fa-solid fa-tag"></i><div><strong>עלות:</strong> 40 יורו לאדם בקבוצה (שיט של 3 שעות).</div></div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><a href="https://maps.app.goo.gl/dXb7gmZwyi9HXb2n7" target="_blank">ניווט לנקודת היציאה</a></div></div>
+            </div>
+        </details>
+
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-green); margin-bottom: 0;">
+            <i class="fa-solid fa-utensils"></i> <strong>18:45</strong> ארוחת ערב במסעדה הכשרה בבדווה (<a href="https://maps.app.goo.gl/z6pmruVBDC7EFUxV9" target="_blank">ניווט</a>)<br>
+            <i class="fa-solid fa-moon"></i> <strong>21:00</strong> לילה טוב
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <h2 class="day-title">יום שישי (5/6) – טיסה חזור</h2>
+        </div>
+        <div class="info-box-inline" style="border-right: 4px solid var(--primary-turquoise); margin-bottom: 0;">
+            <div class="info-row"><i class="fa-solid fa-key"></i> <strong>07:30</strong> צ'ק-אאוט בקוטור ונסיעה של 15 דק' לשדה.</div>
+            <div class="info-row"><i class="fa-solid fa-car-side"></i> <strong>07:30-08:00</strong> החזרת הרכב השכור בשדה בטיבאט.</div>
+            <div class="info-row"><i class="fa-solid fa-plane-up"></i> <strong>10:00</strong> המראה חזרה לישראל.</div>
+        </div>
+    </div>
+
+    <div class="day-card" style="border-top-color: var(--primary-turquoise);">
+        <div class="day-header">
+            <h2 class="day-title">ריכוז עלויות ואטרקציות</h2>
+        </div>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>פעילות / אטרקציה</th>
+                        <th>מחיר לאדם</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>כניסה לשמורת דורמיטור</td><td>5 €</td></tr>
+                    <tr><td>אומגה גשר טארה</td><td>45 €</td></tr>
+                    <tr><td>השכרת סירת משוטים (אגם שחור)</td><td>~5 € <small>(10€ לסירה)</small></td></tr>
+                    <tr><td>רפטינג בקניון טרה</td><td>70 €</td></tr>
+                    <tr><td>שייט באגם סקאדאר</td><td>22 €</td></tr>
+                    <tr><td>רכבל קוטור (הלוך-חזור)</td><td>23 €</td></tr>
+                    <tr><td>מגלשת הרים אלפינית</td><td>8 €</td></tr>
+                    <tr><td>שייט מהיר למערת התכלת</td><td>40 €</td></tr>
+                    <tr class="total-row" style="background-color: rgba(2, 128, 144, 0.08);">
+                        <td>סה"כ אטרקציות מוערך לאדם</td>
+                        <td>218 €</td>
+                    </tr>
+                    <tr class="total-row" style="color: var(--primary-turquoise); background-color: rgba(0, 168, 150, 0.08);">
+                        <td>סה"כ מוערך לזוג</td>
+                        <td>436 €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   <div class="footer">
+        <strong>כל הזכויות שמורות להדס טרכטר - יועצת טיולים בארץ ובעולם 050-5685356</strong><br>
+        אין להעביר ללא אישור מפורש. העובר על כך עובר על גזל לפי דין תורה וחוקי המקום.
+    </div>
+
+
+</body>
+</html>
